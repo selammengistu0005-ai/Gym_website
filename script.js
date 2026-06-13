@@ -830,3 +830,245 @@ backBtn.addEventListener('click', () => {
   });
 
 })();
+
+(function initMuscleModal() {
+
+  const overlay  = document.getElementById('programModalOverlay');
+  const closeBtn = document.getElementById('programModalClose');
+  const content  = document.getElementById('programModalContent');
+  const ctaBtns  = document.querySelectorAll('.muscle-cta');
+
+  if (!overlay || !content || !ctaBtns.length) return;
+
+  const SAMPLE_IMG = 'https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_400/v1781352454/athletic_photo_yqnusn.png';
+
+  /* ---- MUSCLE DATA ---- */
+  const muscleData = {
+    chest: {
+      title: 'CHEST', icon: '🫁',
+      color: 'rgba(255, 100, 60, 0.9)', colorSoft: 'rgba(255, 100, 60, 0.15)',
+      level: 'Beginner – Advanced', duration: '45–60 min', sets: '3–5 sets', reps: '6–15 reps',
+      categories: [
+        { name: 'Upper Chest', exercises: ['Incline Bench Press', 'Incline Dumbbell Press', 'Low-to-High Cable Fly'] },
+        { name: 'Middle Chest', exercises: ['Flat Bench Press', 'Dumbbell Press', 'Machine Chest Press'] },
+        { name: 'Lower Chest', exercises: ['Decline Bench Press', 'Dips', 'High-to-Low Cable Fly'] },
+      ],
+    },
+    back: {
+      title: 'BACK', icon: '🔙',
+      color: 'rgba(80, 160, 255, 0.9)', colorSoft: 'rgba(80, 160, 255, 0.15)',
+      level: 'Beginner – Advanced', duration: '50–65 min', sets: '3–5 sets', reps: '6–12 reps',
+      categories: [
+        { name: 'Lats', exercises: ['Pull-Ups', 'Lat Pulldown', 'Straight-Arm Pulldown'] },
+        { name: 'Traps', exercises: ['Barbell Shrug', 'Dumbbell Shrug', 'Face Pulls'] },
+        { name: 'Rhomboids', exercises: ['Barbell Row', 'Dumbbell Row', 'Seated Cable Row'] },
+        { name: 'Lower Back', exercises: ['Deadlift', 'Romanian Deadlift', 'Hyperextensions'] },
+      ],
+    },
+    shoulder: {
+      title: 'SHOULDER', icon: '🤷',
+      color: 'rgba(255, 209, 0, 0.9)', colorSoft: 'rgba(255, 209, 0, 0.15)',
+      level: 'Beginner – Advanced', duration: '40–55 min', sets: '3–4 sets', reps: '8–15 reps',
+      categories: [
+        { name: 'Front Delt', exercises: ['Overhead Press', 'Arnold Press', 'Front Raises'] },
+        { name: 'Side Delt', exercises: ['Lateral Raises', 'Cable Lateral Raises', 'Upright Rows'] },
+        { name: 'Rear Delt', exercises: ['Reverse Fly', 'Face Pulls', 'Bent-Over Lateral Raises'] },
+      ],
+    },
+    arm: {
+      title: 'ARM', icon: '💪',
+      color: 'rgba(160, 80, 255, 0.9)', colorSoft: 'rgba(160, 80, 255, 0.15)',
+      level: 'Beginner – Advanced', duration: '40–50 min', sets: '3–4 sets', reps: '8–15 reps',
+      categories: [
+        { name: 'Biceps', exercises: ['Barbell Curl', 'Dumbbell Curl', 'Hammer Curl'] },
+        { name: 'Triceps', exercises: ['Skull Crushers', 'Tricep Pushdown', 'Close-Grip Bench Press'] },
+        { name: 'Forearm', exercises: ['Wrist Curls', 'Reverse Curls', 'Farmers Carry'] },
+      ],
+    },
+    abs: {
+      title: 'ABS', icon: '🎯',
+      color: 'rgba(60, 200, 140, 0.9)', colorSoft: 'rgba(60, 200, 140, 0.15)',
+      level: 'Beginner – Advanced', duration: '20–35 min', sets: '3–4 sets', reps: '12–20 reps',
+      categories: [
+        { name: 'Upper Abs', exercises: ['Crunches', 'Cable Crunches', 'Sit-Ups'] },
+        { name: 'Lower Abs', exercises: ['Leg Raises', 'Reverse Crunches', 'Hanging Knee Raises'] },
+      ],
+    },
+    leg: {
+      title: 'LEG', icon: '🦵',
+      color: 'rgba(60, 200, 255, 0.9)', colorSoft: 'rgba(60, 200, 255, 0.15)',
+      level: 'Beginner – Advanced', duration: '55–70 min', sets: '3–5 sets', reps: '6–15 reps',
+      categories: [
+        { name: 'Quads', exercises: ['Barbell Squat', 'Leg Press', 'Leg Extension'] },
+        { name: 'Hamstrings', exercises: ['Romanian Deadlift', 'Leg Curl', 'Nordic Curl'] },
+        { name: 'Calves', exercises: ['Standing Calf Raise', 'Seated Calf Raise', 'Donkey Calf Raise'] },
+        { name: 'Glutes', exercises: ['Hip Thrust', 'Glute Bridge', 'Cable Kickback'] },
+      ],
+    },
+  };
+
+  /* ---- BUILD SUB-MENU (step 1) ---- */
+  const buildSubMenu = (muscle) => {
+    const d = muscleData[muscle];
+    if (!d) return '';
+
+    const buttons = d.categories.map(cat => `
+      <button class="sub-menu-btn" data-muscle="${muscle}" data-category="${cat.name}"
+        style="--sub-color: ${d.color}; --sub-color-soft: ${d.colorSoft};">
+        <span class="sub-menu-btn-icon">${d.icon}</span>
+        <span class="sub-menu-btn-label">${cat.name}</span>
+        <span class="sub-menu-btn-arrow">→</span>
+      </button>
+    `).join('');
+
+    return `
+      <div class="sub-menu-header">
+        <div class="sub-menu-icon-wrap" style="border-color: ${d.colorSoft}; box-shadow: 0 0 20px ${d.colorSoft};">
+          <span>${d.icon}</span>
+        </div>
+        <div>
+          <p class="modal-eyebrow" style="color: ${d.color};">SELECT FOCUS AREA</p>
+          <h2 class="modal-title">${d.title}</h2>
+        </div>
+      </div>
+      <p class="sub-menu-hint">Choose a muscle group to explore targeted exercises.</p>
+      <div class="sub-menu-buttons">
+        ${buttons}
+      </div>
+    `;
+  };
+
+  /* ---- BUILD DETAIL VIEW (step 2) ---- */
+  const buildDetail = (muscle, categoryName) => {
+    const d = muscleData[muscle];
+    const cat = d.categories.find(c => c.name === categoryName);
+    if (!d || !cat) return '';
+
+    const exercises = cat.exercises.map(ex => `
+      <div class="muscle-modal-exercise-card">${ex}</div>
+    `).join('');
+
+    return `
+      <button class="sub-menu-back-btn" data-back="${muscle}">← BACK</button>
+
+      <div class="muscle-modal-hero">
+        <div class="muscle-modal-icon-wrap" style="border-color:${d.colorSoft}; box-shadow: 0 0 20px ${d.colorSoft};">
+          <span class="muscle-modal-icon">${d.icon}</span>
+        </div>
+        <div class="muscle-modal-hero-text">
+          <p class="modal-eyebrow" style="color:${d.color};">${d.title} TRAINING</p>
+          <h2 class="modal-title">${cat.name.toUpperCase()}</h2>
+          <p class="modal-desc">Targeted exercises to develop and strengthen your ${cat.name.toLowerCase()} for maximum results.</p>
+        </div>
+        <img class="muscle-modal-img" src="${SAMPLE_IMG}" alt="${cat.name}" />
+      </div>
+
+      <div class="modal-badges">
+        <div class="modal-badge">
+          <span class="modal-badge-icon">📊</span>
+          <div>
+            <p class="modal-badge-label">LEVEL</p>
+            <p class="modal-badge-value">${d.level}</p>
+          </div>
+        </div>
+        <div class="modal-badge">
+          <span class="modal-badge-icon">⏱️</span>
+          <div>
+            <p class="modal-badge-label">DURATION</p>
+            <p class="modal-badge-value">${d.duration}</p>
+          </div>
+        </div>
+        <div class="modal-badge">
+          <span class="modal-badge-icon">🔁</span>
+          <div>
+            <p class="modal-badge-label">SETS</p>
+            <p class="modal-badge-value">${d.sets}</p>
+          </div>
+        </div>
+        <div class="modal-badge">
+          <span class="modal-badge-icon">💥</span>
+          <div>
+            <p class="modal-badge-label">REPS</p>
+            <p class="modal-badge-value">${d.reps}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="muscle-modal-category">
+        <h4 class="muscle-modal-cat-name" style="color: ${d.color};">${cat.name} EXERCISES</h4>
+        <div class="muscle-modal-exercises">
+          ${exercises}
+        </div>
+      </div>
+
+      <div class="muscle-modal-actions">
+        <button class="muscle-modal-primary-btn" style="box-shadow: 0 8px 30px ${d.colorSoft}; border-color: ${d.color};">START WORKOUT →</button>
+        <button class="muscle-modal-secondary-btn">SAVE PLAN</button>
+        <button class="muscle-modal-secondary-btn">SHARE</button>
+      </div>
+    `;
+  };
+
+  /* ---- OPEN / CLOSE ---- */
+  const openSubMenu = (muscle) => {
+    content.innerHTML = buildSubMenu(muscle);
+    overlay.classList.add('open');
+    document.body.classList.add('modal-open');
+
+    /* wire sub-menu button clicks */
+    content.querySelectorAll('.sub-menu-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const m = btn.dataset.muscle;
+        const cat = btn.dataset.category;
+        content.innerHTML = buildDetail(m, cat);
+
+        /* wire back button */
+        const backBtn = content.querySelector('.sub-menu-back-btn');
+        if (backBtn) {
+          backBtn.addEventListener('click', () => {
+            content.innerHTML = buildSubMenu(backBtn.dataset.back);
+            wireSubMenuBtns();
+          });
+        }
+      });
+    });
+  };
+
+  const wireSubMenuBtns = () => {
+    content.querySelectorAll('.sub-menu-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const m = btn.dataset.muscle;
+        const cat = btn.dataset.category;
+        content.innerHTML = buildDetail(m, cat);
+        const backBtn = content.querySelector('.sub-menu-back-btn');
+        if (backBtn) {
+          backBtn.addEventListener('click', () => {
+            content.innerHTML = buildSubMenu(backBtn.dataset.back);
+            wireSubMenuBtns();
+          });
+        }
+      });
+    });
+  };
+
+  const closeModal = () => {
+    overlay.classList.remove('open');
+    document.body.classList.remove('modal-open');
+  };
+
+  /* ---- WIRE UP CTA BUTTONS ---- */
+  ctaBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openSubMenu(btn.dataset.muscle);
+    });
+  });
+
+  /* ---- CLOSE TRIGGERS ---- */
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+  });
+
+})();
