@@ -2270,6 +2270,558 @@ body.modal-open {
     inset 0 1px 0 rgba(255,255,255,0.4);
 }
 
+/* ========== MUSCLE GROUPS SECTION ========== */
+.muscle-groups {
+  position: relative;
+  background:
+    radial-gradient(ellipse 50% 40% at 10% 20%, rgba(255, 100, 60, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 40% at 90% 15%, rgba(80, 160, 255, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 80% 85%, rgba(255, 209, 0, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 40% at 15% 90%, rgba(120, 60, 220, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 30% at 50% 50%, rgba(60, 200, 140, 0.04) 0%, transparent 60%),
+    #050505;
+}
+
+.muscle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+
+/* BASE GLASS CARD */
+.muscle-card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 1.5rem;
+  padding: 2.2rem 1.8rem;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 0 40px rgba(255,255,255,0.015);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+              border-color 0.4s ease,
+              box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+/* AMBIENT GLOW LAYER */
+.muscle-card-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.6rem;
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(20px);
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.muscle-card:hover .muscle-card-glow {
+  opacity: 1;
+}
+
+/* CONTEXTUAL BG TINT */
+.muscle-bg-image {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.4;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+/* PER-CARD COLOR THEMING */
+.muscle-chest {
+  --muscle-color: rgba(255, 100, 60, 0.9);
+  --muscle-color-soft: rgba(255, 100, 60, 0.15);
+  --muscle-color-glow: rgba(255, 100, 60, 0.25);
+}
+.muscle-chest:hover {
+  border-color: rgba(255, 100, 60, 0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 40px rgba(255, 100, 60, 0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-8px);
+}
+.muscle-chest .muscle-card-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 100, 60, 0.22) 0%, transparent 70%);
+}
+.muscle-chest .muscle-bg-image {
+  background: radial-gradient(circle at 100% 100%, rgba(255, 100, 60, 0.14) 0%, transparent 55%);
+}
+
+.muscle-back {
+  --muscle-color: rgba(80, 160, 255, 0.9);
+  --muscle-color-soft: rgba(80, 160, 255, 0.15);
+  --muscle-color-glow: rgba(80, 160, 255, 0.25);
+}
+.muscle-back:hover {
+  border-color: rgba(80, 160, 255, 0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 40px rgba(80, 160, 255, 0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-8px);
+}
+.muscle-back .muscle-card-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(80, 160, 255, 0.22) 0%, transparent 70%);
+}
+.muscle-back .muscle-bg-image {
+  background: radial-gradient(circle at 100% 100%, rgba(80, 160, 255, 0.14) 0%, transparent 55%);
+}
+
+.muscle-shoulder {
+  --muscle-color: rgba(255, 209, 0, 0.9);
+  --muscle-color-soft: rgba(255, 209, 0, 0.15);
+  --muscle-color-glow: rgba(255, 209, 0, 0.25);
+}
+.muscle-shoulder:hover {
+  border-color: rgba(255, 209, 0, 0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 40px rgba(255, 209, 0, 0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-8px);
+}
+.muscle-shoulder .muscle-card-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 209, 0, 0.22) 0%, transparent 70%);
+}
+.muscle-shoulder .muscle-bg-image {
+  background: radial-gradient(circle at 100% 100%, rgba(255, 209, 0, 0.14) 0%, transparent 55%);
+}
+
+.muscle-arm {
+  --muscle-color: rgba(160, 80, 255, 0.9);
+  --muscle-color-soft: rgba(160, 80, 255, 0.15);
+  --muscle-color-glow: rgba(160, 80, 255, 0.25);
+}
+.muscle-arm:hover {
+  border-color: rgba(160, 80, 255, 0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 40px rgba(160, 80, 255, 0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-8px);
+}
+.muscle-arm .muscle-card-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(160, 80, 255, 0.22) 0%, transparent 70%);
+}
+.muscle-arm .muscle-bg-image {
+  background: radial-gradient(circle at 100% 100%, rgba(160, 80, 255, 0.14) 0%, transparent 55%);
+}
+
+.muscle-abs {
+  --muscle-color: rgba(60, 200, 140, 0.9);
+  --muscle-color-soft: rgba(60, 200, 140, 0.15);
+  --muscle-color-glow: rgba(60, 200, 140, 0.25);
+}
+.muscle-abs:hover {
+  border-color: rgba(60, 200, 140, 0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 40px rgba(60, 200, 140, 0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-8px);
+}
+.muscle-abs .muscle-card-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(60, 200, 140, 0.22) 0%, transparent 70%);
+}
+.muscle-abs .muscle-bg-image {
+  background: radial-gradient(circle at 100% 100%, rgba(60, 200, 140, 0.14) 0%, transparent 55%);
+}
+
+.muscle-leg {
+  --muscle-color: rgba(60, 200, 255, 0.9);
+  --muscle-color-soft: rgba(60, 200, 255, 0.15);
+  --muscle-color-glow: rgba(60, 200, 255, 0.25);
+}
+.muscle-leg:hover {
+  border-color: rgba(60, 200, 255, 0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.55), 0 0 40px rgba(60, 200, 255, 0.18), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-8px);
+}
+.muscle-leg .muscle-card-glow {
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(60, 200, 255, 0.22) 0%, transparent 70%);
+}
+.muscle-leg .muscle-bg-image {
+  background: radial-gradient(circle at 100% 100%, rgba(60, 200, 255, 0.14) 0%, transparent 55%);
+}
+
+/* ICON CONTAINER */
+.muscle-icon-wrap {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    0 4px 20px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+}
+
+.muscle-icon {
+  font-size: 1.8rem;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+}
+
+/* TYPOGRAPHY */
+.muscle-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #FAFAFA;
+  margin: 0;
+}
+
+/* MUSCLE BREAKDOWN LIST */
+.muscle-breakdown {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.muscle-breakdown li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #9A9AA0;
+}
+
+.muscle-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--muscle-color);
+  box-shadow: 0 0 6px var(--muscle-color);
+  flex-shrink: 0;
+}
+
+.muscle-desc {
+  font-size: 0.88rem;
+  color: #6A6A72;
+  line-height: 1.8;
+  flex: 1;
+}
+
+/* EXPLORE WORKOUTS BUTTON */
+.muscle-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  color: #EDEDED;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: background 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.3s ease;
+}
+
+.muscle-cta:hover {
+  background: var(--muscle-color-soft);
+  border-color: var(--muscle-color);
+  box-shadow: 0 0 24px var(--muscle-color-glow);
+  transform: translateY(-2px);
+}
+
+.muscle-cta-arrow {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.muscle-cta:hover .muscle-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 64rem) {
+  .muscle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 48rem) {
+  .muscle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========== MUSCLE SUB-MENU ========== */
+.sub-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.sub-menu-icon-wrap {
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.sub-menu-hint {
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.82rem;
+  color: #6A6A72;
+  letter-spacing: 0.06em;
+  margin-bottom: 1.8rem;
+}
+
+.sub-menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* GLASSMORPHIC CHOICE BUTTON */
+.sub-menu-btn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.1rem 1.4rem;
+  border-radius: 999px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    0 4px 20px rgba(0,0,0,0.25);
+  transition: background 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.3s ease;
+}
+
+.sub-menu-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--sub-color-soft) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sub-menu-btn:hover::before {
+  opacity: 1;
+}
+
+.sub-menu-btn:hover {
+  border-color: var(--sub-color);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 0 28px var(--sub-color-soft),
+    0 8px 24px rgba(0,0,0,0.35);
+  transform: translateY(-2px);
+}
+
+.sub-menu-btn-icon {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.sub-menu-btn-label {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #EDEDED;
+  flex: 1;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.sub-menu-btn-arrow {
+  font-size: 1rem;
+  color: #6A6A72;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sub-menu-btn:hover .sub-menu-btn-arrow {
+  transform: translateX(5px);
+  color: var(--sub-color);
+}
+
+/* BACK BUTTON */
+.sub-menu-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  color: #9A9AA0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  margin-bottom: 1.6rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.sub-menu-back-btn:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: #EDEDED;
+}
+
+/* DETAIL IMAGE */
+.muscle-modal-img {
+  width: 8rem;
+  height: 10rem;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* EXERCISE CARDS */
+.muscle-modal-category {
+  margin-bottom: 1.6rem;
+}
+
+.muscle-modal-cat-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #FFD100;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+.muscle-modal-exercises {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.7rem;
+}
+
+.muscle-modal-exercise-card {
+  background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 0.75rem;
+  padding: 0.8rem 1rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #CDCDCD;
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 4px 12px rgba(0,0,0,0.2);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.muscle-modal-exercise-card:hover {
+  border-color: rgba(255,255,255,0.18);
+  transform: translateY(-2px);
+}
+
+/* ACTION BUTTONS */
+.muscle-modal-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+
+.muscle-modal-primary-btn {
+  flex: 1;
+  min-width: 10rem;
+  padding: 1rem 1.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 100%);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #FAFAFA;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.muscle-modal-primary-btn:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 100%);
+  transform: translateY(-2px);
+}
+
+.muscle-modal-secondary-btn {
+  padding: 1rem 1.4rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #9A9AA0;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.muscle-modal-secondary-btn:hover {
+  border-color: rgba(255,255,255,0.25);
+  color: #EDEDED;
+}
+
+@media (max-width: 48rem) {
+  .muscle-modal-exercises {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .muscle-modal-img {
+    width: 6rem;
+    height: 8rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .muscle-modal-exercises {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ============================================================
    RESPONSIVE — CONSOLIDATED MEDIA QUERIES
    ============================================================ */
