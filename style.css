@@ -931,7 +931,7 @@ img {
 
 .trainers-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
 }
 
@@ -946,6 +946,19 @@ img {
   overflow: hidden;
   background: #141414;
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+
+.trainer-img-wrap:has(img) {
+  aspect-ratio: auto;
+  clip-path: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.trainer-img-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .trainer-img-placeholder {
