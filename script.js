@@ -891,8 +891,18 @@ backBtn.addEventListener('click', () => {
             { name: 'Prone T-Raises', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781443990/prone_raises_iuaaw7.png', howto: 'Lie face down on a bench or the floor with arms extended out to the sides forming a T shape. Raise your arms upward, squeezing your shoulder blades together, then lower back down with control. Engages the traps and rear delts to build upper back thickness.' },
           ],
         },
-        { name: 'Rhomboids', icon: '🎯', exercises: [] },
-        { name: 'Lower Back', icon: '🎯', exercises: [] },
+        {
+          name: 'Rhomboids', icon: '🎯',
+          exercises: [
+            { name: 'Reverse Snow Angels', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781446780/reverse_snow_angels_yz0w1r.png', howto: 'Lie face down with arms extended overhead. Sweep your arms outward and down toward your hips in an arc, squeezing your shoulder blades together at the bottom, then reverse the motion back overhead. Builds rhomboid and mid-back strength.' },
+          ],
+        },
+        {
+          name: 'Lower Back', icon: '🎯',
+          exercises: [
+            { name: 'Prone T-Raises', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781443990/prone_raises_iuaaw7.png', howto: 'Lie face down on a bench or the floor with arms extended out to the sides forming a T shape. Raise your arms upward, squeezing your shoulder blades together, then lower back down with control. Also engages the lower back through spinal extension.' },
+          ],
+        },
       ],
     },
     shoulder: {
@@ -944,7 +954,7 @@ backBtn.addEventListener('click', () => {
     `).join('');
   };
 
-  /* ---- BUILD EXERCISES PANEL HTML (CAROUSEL) ---- */
+/* ---- BUILD EXERCISES PANEL HTML (CAROUSEL + INFO PANEL) ---- */
   const buildExercises = (muscle, categoryName) => {
     const d = canvasData[muscle];
     const cat = d.categories.find(c => c.name === categoryName);
@@ -956,8 +966,6 @@ backBtn.addEventListener('click', () => {
     const cards = cat.exercises.map((ex, i) => `
       <div class="muscle-exercise-card" data-index="${i}" style="--pill-color: ${d.color}; --pill-color-soft: ${d.colorSoft};">
         <img class="muscle-exercise-img" src="${ex.img}" alt="${ex.name}" loading="lazy" />
-        <p class="muscle-exercise-name">${ex.name}</p>
-        <p class="muscle-exercise-howto">${ex.howto || ''}</p>
       </div>
     `).join('');
 
@@ -970,16 +978,26 @@ backBtn.addEventListener('click', () => {
       <button class="muscle-carousel-nav next" style="--pill-color: ${d.color};">›</button>
     ` : '';
 
+    const infoBlocks = cat.exercises.map((ex, i) => `
+      <div class="muscle-info-content${i === 0 ? ' is-active' : ''}" data-index="${i}" style="--pill-color: ${d.color};">
+        <h4 class="muscle-exercise-name">${ex.name}</h4>
+        <p class="muscle-exercise-howto">${ex.howto || ''}</p>
+      </div>
+    `).join('');
+
     return `
       <div class="muscle-carousel" data-active="0">
         ${cards}
         ${navArrows}
         <div class="muscle-carousel-dots">${dots}</div>
       </div>
+      <div class="muscle-info-panel">
+        ${infoBlocks}
+      </div>
     `;
   };
 
-  /* ---- WIRE CAROUSEL NAV / DOTS / CLICK-TO-FRONT ---- */
+/* ---- WIRE CAROUSEL NAV / DOTS / CLICK-TO-FRONT + INFO PANEL SYNC ---- */
   const wireCarousel = (panel) => {
     const carousel = panel.querySelector('.muscle-carousel');
     if (!carousel) return;
@@ -988,6 +1006,7 @@ backBtn.addEventListener('click', () => {
     const dots  = [...carousel.querySelectorAll('.muscle-carousel-dot')];
     const prevBtn = carousel.querySelector('.muscle-carousel-nav.prev');
     const nextBtn = carousel.querySelector('.muscle-carousel-nav.next');
+    const infoBlocks = [...panel.querySelectorAll('.muscle-info-content')];
     const total = cards.length;
 
     const render = () => {
@@ -1005,6 +1024,7 @@ backBtn.addEventListener('click', () => {
         }
       });
       dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
+      infoBlocks.forEach((info, i) => info.classList.toggle('is-active', i === active));
     };
 
     const goTo = (index) => {
