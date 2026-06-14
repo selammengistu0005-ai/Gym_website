@@ -2957,11 +2957,12 @@ body.modal-open {
 
 /* EXERCISES PANEL */
 .muscle-exercises-panel {
-  flex: 1;
+  flex: 2;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2.5rem;
   width: 100%;
   max-width: none;
   min-height: 40rem;
@@ -2975,31 +2976,24 @@ body.modal-open {
   transform: translateX(0);
 }
 
-/* CAROUSEL STACK */
 .muscle-carousel {
   position: relative;
   width: 100%;
-  max-width: 46rem;
-  height: 40rem;
+  max-width: 52rem;
+  height: 60rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  flex-shrink: 0;
 }
 
 .muscle-exercise-card {
   position: absolute;
-  width: 38rem;
-  background: linear-gradient(160deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.015) 100%);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 1.2rem;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 24px rgba(0,0,0,0.3);
+  width: 48rem;
+  height: 58rem;
   transition: transform 0.5s cubic-bezier(0.4,0,0.2,1),
               opacity 0.5s ease,
-              box-shadow 0.4s ease,
-              border-color 0.4s ease;
+              filter 0.4s ease;
   cursor: pointer;
 }
 
@@ -3008,21 +3002,22 @@ body.modal-open {
   transform: translateX(0) scale(1) rotateY(0deg);
   z-index: 3;
   opacity: 1;
-  box-shadow: 0 0 30px var(--pill-color-soft, rgba(255,209,0,0.15)), 0 16px 40px rgba(0,0,0,0.5);
-  border-color: var(--pill-color, rgba(255,209,0,0.4));
+  filter: drop-shadow(0 0 30px var(--pill-color-soft, rgba(255,209,0,0.15))) drop-shadow(0 16px 40px rgba(0,0,0,0.5));
   cursor: default;
 }
 
 .muscle-exercise-card.is-prev {
-  transform: translateX(-6.5rem) scale(0.85) rotateY(8deg);
+  transform: translateX(-5rem) scale(0.85) rotateY(8deg);
   z-index: 2;
   opacity: 0.55;
+  filter: blur(3px);
 }
 
 .muscle-exercise-card.is-next {
-  transform: translateX(6.5rem) scale(0.85) rotateY(-8deg);
+  transform: translateX(5rem) scale(0.85) rotateY(-8deg);
   z-index: 2;
   opacity: 0.55;
+  filter: blur(3px);
 }
 
 .muscle-exercise-card.is-hidden {
@@ -3035,31 +3030,70 @@ body.modal-open {
 .muscle-exercise-card:hover.is-prev,
 .muscle-exercise-card:hover.is-next {
   opacity: 0.85;
+  filter: blur(1px);
 }
 
 .muscle-exercise-img {
   width: 100%;
-  height: 24rem;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   display: block;
+}
+
+/* RIGHT-SIDE INFO PANEL */
+.muscle-info-panel {
+  position: relative;
+  width: 100%;
+  max-width: 24rem;
+  flex-shrink: 0;
+  min-height: 18rem;
+}
+
+.muscle-info-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(1.2rem);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+
+.muscle-info-content.is-active {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
 }
 
 .muscle-exercise-name {
   font-family: 'Oswald', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 1.7rem;
+  font-weight: 700;
   letter-spacing: 0.06em;
   color: #EDEDED;
-  text-align: center;
-  padding: 0.9rem 0.6rem 0.4rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.muscle-exercise-name::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--pill-color, #FFD100);
 }
 
 .muscle-exercise-howto {
   font-family: 'Barlow', sans-serif;
-  font-size: 0.8rem;
-  line-height: 1.6;
+  font-size: 1.2rem;
+  line-height: 1.85;
   color: #9A9AA0;
-  padding: 0 1.1rem 1.1rem;
   text-align: left;
 }
 
