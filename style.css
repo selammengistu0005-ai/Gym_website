@@ -3261,8 +3261,8 @@ body.modal-open {
     color: #F0F0F0;
   }
 
-  body.menu-open .navbar,
-  body.menu-open > *:not(.nav-links):not(.program-modal-overlay):not(.muscle-canvas-wrap) {
+  body.menu-open .navbar:not(:has(.nav-links.open)),
+  body.menu-open > *:not(.program-modal-overlay):not(.muscle-canvas-wrap) {
     filter: blur(6px);
     transition: filter 0.3s ease;
   }
