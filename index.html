@@ -1,1 +1,754 @@
-d
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRONFORGE GYM — Forge Your Limits</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <span class="logo-iron">IRON</span><span class="logo-forge">FORGE</span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#trainers">Trainers</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">JOIN NOW</a>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="home">
+    <div class="hero-bg-layer"></div>
+    <div class="hero-smoke"></div>
+    <div class="hero-grain"></div>
+    <div class="hero-yellow-slash slash-1"></div>
+    <div class="hero-yellow-slash slash-2"></div>
+    <div class="hero-yellow-slash slash-3"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">EST. 2010 · PREMIUM FITNESS</p>
+      <h1 class="hero-headline">
+        FORGE<br />
+        <span class="claw-text" data-text="Your Limits">Your Limits</span>
+      </h1>
+      <p class="hero-sub">
+        Built for those who refuse to settle. Train harder, move faster,<br />
+        become unbreakable — inside and out.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">START TRAINING</a>
+        <a href="#programs" class="btn-ghost">EXPLORE PROGRAMS</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========== STATS BAR ========== -->
+  <section class="stats-bar">
+    <div class="stats-container">
+      <div class="stat-item">
+        <span class="stat-number" data-target="1200">0</span><span class="stat-plus">+</span>
+        <p class="stat-label">Active Members</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="18">0</span><span class="stat-plus">+</span>
+        <p class="stat-label">Expert Trainers</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="15">0</span><span class="stat-plus">+</span>
+        <p class="stat-label">Years of Excellence</p>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="60">0</span><span class="stat-plus">+</span>
+        <p class="stat-label">Weekly Programs</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BODY TYPE SELECTOR ========== -->
+<section class="bodytype" id="bodytype">
+  <div class="bodytype-container">
+
+    <div class="bodytype-intro">
+      <p class="section-label">KNOW YOUR STARTING POINT</p>
+      <h2 class="section-title">WHAT'S YOUR <span class="yellow-accent">BODY TYPE?</span></h2>
+      <p class="bodytype-desc">Every transformation starts with honesty. Select the body type that best represents you today — we'll tell you exactly where to begin.</p>
+    </div>
+
+    <div class="bodytype-canvas-wrap">
+      <div class="bodytype-canvas" id="bodytypeCanvas">
+        <div class="made-by-pill">Made by Selam</div>
+
+        <!-- STATE 1: Start Button -->
+        <div class="canvas-state" id="stateStart">
+          <button class="canvas-start-btn" id="canvasStartBtn">
+            <span class="start-btn-icon">▶</span>
+            <span class="start-btn-text">START</span>
+          </button>
+        </div>
+
+        <!-- STATE 2: Body Type Selection -->
+        <div class="canvas-state hidden" id="stateSelect">
+            <button class="canvas-close-btn" id="canvasCloseBtn">✕ CLOSE</button>
+          <p class="canvas-instruction">SELECT YOUR BODY TYPE</p>
+          <div class="bodytype-grid" id="bodytypeGrid">
+
+            <div class="bodytype-card" data-type="skinny">
+              <div class="bodytype-img-wrap">
+                <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_180/v1781352462/skinny_photo_rengyx.png" alt="Skinny body type" loading="lazy" />
+              </div>
+              <span class="bodytype-label">SKINNY</span>
+            </div>
+
+            <div class="bodytype-card" data-type="athletic">
+              <div class="bodytype-img-wrap">
+                <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_180/v1781352454/athletic_photo_yqnusn.png" alt="Athletic body type" loading="lazy" />
+              </div>
+              <span class="bodytype-label">ATHLETIC</span>
+            </div>
+
+            <div class="bodytype-card" data-type="average">
+              <div class="bodytype-img-wrap">
+                <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_180/v1781352466/average_photo_f5vyxa.png" alt="Average body type" loading="lazy" />
+              </div>
+              <span class="bodytype-label">AVERAGE</span>
+            </div>
+
+            <div class="bodytype-card" data-type="stocky">
+              <div class="bodytype-img-wrap">
+                <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_180/v1781352470/stocky_photo_brugfm.png" alt="Stocky body type" loading="lazy" />
+              </div>
+              <span class="bodytype-label">STOCKY</span>
+            </div>
+
+            <div class="bodytype-card" data-type="plussize">
+              <div class="bodytype-img-wrap">
+                <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_180/v1781352462/plussize_photo_vumzr5.png" alt="Plus size body type" loading="lazy" />
+              </div>
+              <span class="bodytype-label">PLUS SIZE</span>
+            </div>
+
+            <div class="bodytype-card" data-type="obese">
+              <div class="bodytype-img-wrap">
+                <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_180/v1781353287/obesse_photo_kartxq.png" alt="Obese body type" loading="lazy" />
+              </div>
+              <span class="bodytype-label">OBESE</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- STATE 3: Exercise Result -->
+        <div class="canvas-state hidden" id="stateResult">
+          <button class="canvas-back-btn" id="canvasBackBtn">← BACK</button>
+          <div class="result-body">
+            <div class="result-selected-wrap">
+              <img class="result-selected-img" id="resultImg" src="" alt="" />
+              <div class="result-selected-info">
+                <p class="result-type-label">YOUR TYPE</p>
+                <h3 class="result-type-name" id="resultTypeName"></h3>
+                <p class="result-goal" id="resultGoal"></p>
+              </div>
+            </div>
+            <div class="result-exercises result-exercises-col" id="resultExercises"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about" id="about">
+    <div class="section-container">
+      <div class="about-text">
+        <p class="section-label">WHO WE ARE</p>
+        <h2 class="section-title">NOT JUST A GYM.<br /><span class="yellow-accent">A FORGE.</span></h2>
+        <p class="about-body">
+          IronForge was built for those who take their body seriously. This is not a place for excuses — 
+          it's a place for transformation. Every piece of equipment, every program, every trainer 
+          has been selected with one goal in mind: to push you beyond what you thought possible.
+        </p>
+        <p class="about-body">
+          We don't believe in shortcuts. We believe in sweat, structure, and results 
+          that last a lifetime. Welcome to the forge.
+        </p>
+        <a href="#programs" class="btn-primary">SEE OUR PROGRAMS</a>
+      </div>
+      <div class="about-visual">
+        <div class="about-image-block">
+          <div class="about-img-placeholder">
+            <div class="placeholder-icon">💪</div>
+            <p>IRONFORGE GYM</p>
+          </div>
+          <div class="about-badge">
+            <span class="badge-year">15</span>
+            <span class="badge-text">YEARS<br/>STRONG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROGRAMS ========== -->
+  <section class="programs" id="programs">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-label">WHAT WE OFFER</p>
+        <h2 class="section-title">OUR <span class="yellow-accent">PROGRAMS</span></h2>
+        <p class="section-subtitle">Every program built to drive real results — not just get you sweating.</p>
+      </div>
+
+      <div class="programs-grid">
+
+        <div class="program-card" data-program="strength">
+          <div class="program-card-glow"></div>
+          <div class="program-bg-image program-bg-strength"></div>
+          <div class="program-icon-wrap"><div class="program-icon">🏋️</div></div>
+          <h3 class="program-name">STRENGTH TRAINING</h3>
+          <p class="program-desc">Build raw power and muscle through progressive overload, compound lifts, and expert programming designed for all levels.</p>
+          <span class="program-tag">BEGINNER – ADVANCED</span>
+        </div>
+
+        <div class="program-card featured" data-program="hiit">
+          <div class="program-card-glow"></div>
+          <div class="program-bg-image program-bg-hiit"></div>
+          <div class="program-featured-badge">★ MOST POPULAR</div>
+          <div class="program-icon-wrap"><div class="program-icon">⚡</div></div>
+          <h3 class="program-name">HIIT</h3>
+          <p class="program-desc">High-intensity interval training that burns maximum calories, shreds fat, and pushes your cardiovascular system to the edge.</p>
+          <span class="program-tag">ALL LEVELS</span>
+        </div>
+
+        <div class="program-card" data-program="cardio">
+          <div class="program-card-glow"></div>
+          <div class="program-bg-image program-bg-cardio"></div>
+          <div class="program-icon-wrap"><div class="program-icon">🏃</div></div>
+          <h3 class="program-name">CARDIO & ENDURANCE</h3>
+          <p class="program-desc">Improve stamina, heart health, and athletic endurance with structured cardio sessions tailored to your fitness goals.</p>
+          <span class="program-tag">BEGINNER – INTERMEDIATE</span>
+        </div>
+
+        <div class="program-card" data-program="personal">
+          <div class="program-card-glow"></div>
+          <div class="program-bg-image program-bg-personal"></div>
+          <div class="program-icon-wrap"><div class="program-icon">🎯</div></div>
+          <h3 class="program-name">PERSONAL TRAINING</h3>
+          <p class="program-desc">1-on-1 sessions with a certified trainer. Personalized plans, real accountability, and results that speak for themselves.</p>
+          <span class="program-tag">ALL LEVELS</span>
+        </div>
+
+        <div class="program-card" data-program="nutrition">
+          <div class="program-card-glow"></div>
+          <div class="program-bg-image program-bg-nutrition"></div>
+          <div class="program-icon-wrap"><div class="program-icon">🥗</div></div>
+          <h3 class="program-name">NUTRITION COACHING</h3>
+          <p class="program-desc">Fuel your performance with science-backed nutrition plans, macro tracking, and meal strategy built around your body.</p>
+          <span class="program-tag">SUPPLEMENT TO TRAINING</span>
+        </div>
+
+        <div class="program-card" data-program="mma">
+          <div class="program-card-glow"></div>
+          <div class="program-bg-image program-bg-mma"></div>
+          <div class="program-icon-wrap"><div class="program-icon">🥊</div></div>
+          <h3 class="program-name">MMA & COMBAT</h3>
+          <p class="program-desc">Train like a fighter. Boxing, kickboxing, and grappling fundamentals combined with elite-level conditioning work.</p>
+          <span class="program-tag">INTERMEDIATE – ADVANCED</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MUSCLE GROUPS ========== -->
+  <section class="muscle-groups" id="muscle-groups">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-label">TARGET TRAINING</p>
+        <h2 class="section-title">TRAIN BY <span class="yellow-accent">MUSCLE GROUP</span></h2>
+        <p class="section-subtitle">Focused programs built around the muscles you want to develop.</p>
+      </div>
+
+      <div class="muscle-grid">
+
+        <div class="muscle-card muscle-chest" data-muscle="chest">
+          <div class="muscle-card-glow"></div>
+          <div class="muscle-bg-image"></div>
+          <div class="muscle-icon-wrap"><div class="muscle-icon">🎯</div></div>
+          <h3 class="muscle-name">CHEST</h3>
+          <ul class="muscle-breakdown">
+            <li><span class="muscle-dot"></span>Upper Chest</li>
+            <li><span class="muscle-dot"></span>Middle Chest</li>
+            <li><span class="muscle-dot"></span>Lower Chest</li>
+          </ul>
+          <p class="muscle-desc">Build a strong, defined chest with targeted exercises focused on strength, mass, and muscular balance.</p>
+          <button class="muscle-cta" data-muscle="chest">EXPLORE WORKOUTS <span class="muscle-cta-arrow">→</span></button>
+        </div>
+
+        <div class="muscle-card muscle-back" data-muscle="back">
+          <div class="muscle-card-glow"></div>
+          <div class="muscle-bg-image"></div>
+          <div class="muscle-icon-wrap"><div class="muscle-icon">🎯</div></div>
+          <h3 class="muscle-name">BACK</h3>
+          <ul class="muscle-breakdown">
+            <li><span class="muscle-dot"></span>Lats</li>
+            <li><span class="muscle-dot"></span>Traps</li>
+            <li><span class="muscle-dot"></span>Rhomboids</li>
+            <li><span class="muscle-dot"></span>Lower Back</li>
+          </ul>
+          <p class="muscle-desc">Develop width, thickness, posture, and pulling strength through complete back training.</p>
+          <button class="muscle-cta" data-muscle="back">EXPLORE WORKOUTS <span class="muscle-cta-arrow">→</span></button>
+        </div>
+
+        <div class="muscle-card muscle-shoulder" data-muscle="shoulder">
+          <div class="muscle-card-glow"></div>
+          <div class="muscle-bg-image"></div>
+          <div class="muscle-icon-wrap"><div class="muscle-icon">🎯</div></div>
+          <h3 class="muscle-name">SHOULDER</h3>
+          <ul class="muscle-breakdown">
+            <li><span class="muscle-dot"></span>Front Delt</li>
+            <li><span class="muscle-dot"></span>Side Delt</li>
+            <li><span class="muscle-dot"></span>Rear Delt</li>
+          </ul>
+          <p class="muscle-desc">Sculpt rounded, capped shoulders with balanced pressing and lateral movement work.</p>
+          <button class="muscle-cta" data-muscle="shoulder">EXPLORE WORKOUTS <span class="muscle-cta-arrow">→</span></button>
+        </div>
+
+        <div class="muscle-card muscle-arm" data-muscle="arm">
+          <div class="muscle-card-glow"></div>
+          <div class="muscle-bg-image"></div>
+          <div class="muscle-icon-wrap"><div class="muscle-icon">💪</div></div>
+          <h3 class="muscle-name">ARM</h3>
+          <ul class="muscle-breakdown">
+            <li><span class="muscle-dot"></span>Biceps</li>
+            <li><span class="muscle-dot"></span>Triceps</li>
+            <li><span class="muscle-dot"></span>Forearm</li>
+          </ul>
+          <p class="muscle-desc">Build powerful, well-rounded arms with focused isolation and compound movements.</p>
+          <button class="muscle-cta" data-muscle="arm">EXPLORE WORKOUTS <span class="muscle-cta-arrow">→</span></button>
+        </div>
+
+        <div class="muscle-card muscle-abs" data-muscle="abs">
+          <div class="muscle-card-glow"></div>
+          <div class="muscle-bg-image"></div>
+          <div class="muscle-icon-wrap"><div class="muscle-icon">🎯</div></div>
+          <h3 class="muscle-name">ABS</h3>
+          <ul class="muscle-breakdown">
+            <li><span class="muscle-dot"></span>Upper Abs</li>
+            <li><span class="muscle-dot"></span>Lower Abs</li>
+          </ul>
+          <p class="muscle-desc">Strengthen your core for stability, definition, and total-body performance.</p>
+          <button class="muscle-cta" data-muscle="abs">EXPLORE WORKOUTS <span class="muscle-cta-arrow">→</span></button>
+        </div>
+
+        <div class="muscle-card muscle-leg" data-muscle="leg">
+          <div class="muscle-card-glow"></div>
+          <div class="muscle-bg-image"></div>
+          <div class="muscle-icon-wrap"><div class="muscle-icon">🦵</div></div>
+          <h3 class="muscle-name">LEG</h3>
+          <ul class="muscle-breakdown">
+            <li><span class="muscle-dot"></span>Quads</li>
+            <li><span class="muscle-dot"></span>Hamstrings</li>
+            <li><span class="muscle-dot"></span>Calves</li>
+            <li><span class="muscle-dot"></span>Glutes</li>
+          </ul>
+          <p class="muscle-desc">Develop explosive power and stability with complete lower-body training.</p>
+          <button class="muscle-cta" data-muscle="leg">EXPLORE WORKOUTS <span class="muscle-cta-arrow">→</span></button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MUSCLE EXERCISE CANVAS ========== -->
+  <div class="muscle-canvas-wrap">
+    <div class="muscle-canvas" id="muscleCanvas">
+
+      <button class="canvas-back-btn muscle-canvas-close" id="muscleCanvasClose">✕ CLOSE</button>
+
+      <!-- STATE 1: Pills centered -->
+      <div class="muscle-canvas-state" id="muscleStatePills">
+        <div class="muscle-pills-wrap" id="musclePillsWrap">
+          <!-- pills injected by JS -->
+        </div>
+      </div>
+
+      <!-- STATE 2: Pills left, exercises right -->
+      <div class="muscle-canvas-state hidden" id="muscleStateDetail">
+        <div class="muscle-pills-wrap muscle-pills-left" id="musclePillsWrapDetail">
+          <!-- pills injected by JS -->
+        </div>
+        <div class="muscle-exercises-panel" id="muscleExercisesPanel">
+          <!-- exercise images injected by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</parameter>
+
+  <!-- ========== TRAINERS ========== -->
+  <section class="trainers" id="trainers">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-label">THE TEAM</p>
+        <h2 class="section-title">MEET YOUR <span class="yellow-accent">TRAINERS</span></h2>
+        <p class="section-subtitle">Certified. Experienced. Relentless. Our trainers have been through the forge themselves.</p>
+      </div>
+
+      <div class="trainers-grid">
+
+        <div class="trainer-card">
+          <div class="trainer-img-wrap">
+            <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_400/v1781464082/yorichi_mf2utd.png" alt="Marcus Reed, Strength & Powerlifting trainer" loading="lazy" />
+            <div class="trainer-overlay">
+              <div class="trainer-social">
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="Twitter">TW</a>
+              </div>
+            </div>
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">MARCUS REED</h3>
+            <p class="trainer-specialty">Strength & Powerlifting</p>
+            <p class="trainer-exp">12 Years Experience</p>
+          </div>
+        </div>
+
+        <div class="trainer-card">
+          <div class="trainer-img-wrap">
+            <img src="https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_400/v1781464037/sanemi_vki9pd.png" alt="Jade Santos, HIIT & Fat Loss trainer" loading="lazy" />
+            <div class="trainer-overlay">
+              <div class="trainer-social">
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="Twitter">TW</a>
+              </div>
+            </div>
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">JADE SANTOS</h3>
+            <p class="trainer-specialty">HIIT & Fat Loss</p>
+            <p class="trainer-exp">8 Years Experience</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRICING ========== -->
+  <section class="pricing" id="pricing">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-label">INVESTMENT</p>
+        <h2 class="section-title">CHOOSE YOUR <span class="yellow-accent">PLAN</span></h2>
+        <p class="section-subtitle">No hidden fees. No excuses. Just results.</p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="pricing-card">
+          <div class="plan-label">BASIC</div>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount">39</span>
+            <span class="period">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li class="feat-yes">Full Gym Access</li>
+            <li class="feat-yes">Locker Room & Showers</li>
+            <li class="feat-yes">Group Cardio Classes</li>
+            <li class="feat-no">Personal Trainer Sessions</li>
+            <li class="feat-no">Nutrition Coaching</li>
+            <li class="feat-no">Priority Booking</li>
+          </ul>
+          <a href="#contact" class="btn-ghost-plan">GET STARTED</a>
+        </div>
+
+        <div class="pricing-card featured">
+          <div class="plan-popular-badge">MOST POPULAR</div>
+          <div class="plan-label">PRO</div>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount">79</span>
+            <span class="period">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li class="feat-yes">Full Gym Access</li>
+            <li class="feat-yes">Locker Room & Showers</li>
+            <li class="feat-yes">All Group Classes</li>
+            <li class="feat-yes">4 PT Sessions / Month</li>
+            <li class="feat-yes">Nutrition Coaching</li>
+            <li class="feat-no">Priority Booking</li>
+          </ul>
+          <a href="#contact" class="btn-primary">GET STARTED</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="plan-label">ELITE</div>
+          <div class="plan-price">
+            <span class="currency">$</span>
+            <span class="amount">149</span>
+            <span class="period">/mo</span>
+          </div>
+          <ul class="plan-features">
+            <li class="feat-yes">Full Gym Access — 24/7</li>
+            <li class="feat-yes">Locker Room & Showers</li>
+            <li class="feat-yes">All Group Classes</li>
+            <li class="feat-yes">Unlimited PT Sessions</li>
+            <li class="feat-yes">Full Nutrition Program</li>
+            <li class="feat-yes">Priority Booking</li>
+          </ul>
+          <a href="#contact" class="btn-ghost-plan">GET STARTED</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TESTIMONIALS ========== -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-label">REAL RESULTS</p>
+        <h2 class="section-title">WHAT MEMBERS <span class="yellow-accent">SAY</span></h2>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"IronForge completely transformed how I train. In 6 months I went from 28% body fat to 14%. The trainers here don't let you quit."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">JM</div>
+            <div>
+              <p class="testi-name">JAMES MILLER</p>
+              <p class="testi-role">Member since 2022</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card featured">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"I've been to 5 different gyms. None of them come close to IronForge. The environment alone makes you want to push harder every single session."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SK</div>
+            <div>
+              <p class="testi-name">SARAH KNIGHT</p>
+              <p class="testi-role">Member since 2021</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-quote">"The nutrition coaching paired with the HIIT program is insane. I finally understand how to train AND eat. Best investment I've made in myself."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">TP</div>
+            <div>
+              <p class="testi-name">TONY PARKER</p>
+              <p class="testi-role">Member since 2023</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY ========== -->
+  <section class="gallery" id="gallery">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-label">THE ENVIRONMENT</p>
+        <h2 class="section-title">INSIDE THE <span class="yellow-accent">FORGE</span></h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item large">
+          <div class="gallery-placeholder"><span>WEIGHT FLOOR</span></div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder"><span>HIIT ZONE</span></div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder"><span>COMBAT ROOM</span></div>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder"><span>CARDIO DECK</span></div>
+        </div>
+        <div class="gallery-item large-h">
+          <div class="gallery-placeholder"><span>RECOVERY LOUNGE</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="contact" id="contact">
+    <div class="section-container">
+      <div class="contact-grid">
+
+        <div class="contact-info">
+          <p class="section-label">JOIN THE FORGE</p>
+          <h2 class="section-title">READY TO <span class="yellow-accent">START?</span></h2>
+          <p class="contact-body">Fill out the form and one of our trainers will get back to you within 24 hours. Your first session is on us.</p>
+
+          <div class="contact-details">
+            <div class="contact-detail-item">
+              <span class="detail-icon">📍</span>
+              <div>
+                <p class="detail-label">LOCATION</p>
+                <p class="detail-value">142 Iron District, Downtown</p>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <span class="detail-icon">📞</span>
+              <div>
+                <p class="detail-label">PHONE</p>
+                <p class="detail-value">+1 (800) IRONFORGE</p>
+              </div>
+            </div>
+            <div class="contact-detail-item">
+              <span class="detail-icon">🕐</span>
+              <div>
+                <p class="detail-label">HOURS</p>
+                <p class="detail-value">Mon–Fri: 5AM–11PM<br />Sat–Sun: 6AM–9PM</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <div class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">FIRST NAME</label>
+                <input type="text" id="fname" placeholder="John" />
+              </div>
+              <div class="form-group">
+                <label for="lname">LAST NAME</label>
+                <input type="text" id="lname" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">EMAIL ADDRESS</label>
+              <input type="email" id="email" placeholder="john@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">PHONE NUMBER</label>
+              <input type="tel" id="phone" placeholder="+1 (000) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label for="program">INTERESTED IN</label>
+              <select id="program">
+                <option value="">Select a program...</option>
+                <option value="strength">Strength Training</option>
+                <option value="hiit">HIIT</option>
+                <option value="cardio">Cardio & Endurance</option>
+                <option value="personal">Personal Training</option>
+                <option value="nutrition">Nutrition Coaching</option>
+                <option value="mma">MMA & Combat</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">YOUR GOAL</label>
+              <textarea id="message" rows="4" placeholder="Tell us what you want to achieve..."></textarea>
+            </div>
+            <button type="button" class="btn-primary full-width" id="submitBtn">SEND MESSAGE</button>
+            <p class="form-note">* Your first trial session is completely FREE.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo footer-logo">
+            <span class="logo-iron">IRON</span><span class="logo-forge">FORGE</span>
+          </div>
+          <p class="footer-tagline">Built for those who refuse to settle.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram" class="social-link">IG</a>
+            <a href="#" aria-label="Facebook" class="social-link">FB</a>
+            <a href="#" aria-label="YouTube" class="social-link">YT</a>
+            <a href="#" aria-label="Twitter" class="social-link">TW</a>
+          </div>
+        </div>
+
+        <div class="footer-links-group">
+          <p class="footer-group-title">EXPLORE</p>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-group">
+          <p class="footer-group-title">SUPPORT</p>
+          <ul>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-newsletter">
+          <p class="footer-group-title">STAY SHARP</p>
+          <p class="newsletter-desc">Get training tips and exclusive offers.</p>
+          <div class="newsletter-input">
+            <input type="email" placeholder="Your email" />
+            <button type="button">GO</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 IRONFORGE GYM. ALL RIGHTS RESERVED.</p>
+        <p>DESIGNED FOR CHAMPIONS.</p>
+      </div>
+    </div>
+    </footer>
+
+  <!-- ========== PROGRAM DETAIL MODAL ========== -->
+  <div class="program-modal-overlay" id="programModalOverlay">
+    <div class="program-modal" id="programModal">
+      <button class="program-modal-close" id="programModalClose" aria-label="Close">✕</button>
+      <div class="program-modal-content" id="programModalContent"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
