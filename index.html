@@ -385,6 +385,33 @@
     </div>
   </section>
 
+  <!-- ========== MUSCLE EXERCISE CANVAS ========== -->
+  <div class="muscle-canvas-wrap">
+    <div class="muscle-canvas" id="muscleCanvas">
+
+      <button class="canvas-back-btn muscle-canvas-close" id="muscleCanvasClose">✕ CLOSE</button>
+
+      <!-- STATE 1: Pills centered -->
+      <div class="muscle-canvas-state" id="muscleStatePills">
+        <div class="muscle-pills-wrap" id="musclePillsWrap">
+          <!-- pills injected by JS -->
+        </div>
+      </div>
+
+      <!-- STATE 2: Pills left, exercises right -->
+      <div class="muscle-canvas-state hidden" id="muscleStateDetail">
+        <div class="muscle-pills-wrap muscle-pills-left" id="musclePillsWrapDetail">
+          <!-- pills injected by JS -->
+        </div>
+        <div class="muscle-exercises-panel" id="muscleExercisesPanel">
+          <!-- exercise images injected by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</parameter>
+
   <!-- ========== TRAINERS ========== -->
   <section class="trainers" id="trainers">
     <div class="section-container">
