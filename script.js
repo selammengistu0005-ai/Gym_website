@@ -831,244 +831,268 @@ backBtn.addEventListener('click', () => {
 
 })();
 
-(function initMuscleModal() {
+/* ========== MUSCLE EXERCISE CANVAS ========== */
+(function initMuscleCanvas() {
 
-  const overlay  = document.getElementById('programModalOverlay');
-  const closeBtn = document.getElementById('programModalClose');
-  const content  = document.getElementById('programModalContent');
-  const ctaBtns  = document.querySelectorAll('.muscle-cta');
+  const canvas        = document.getElementById('muscleCanvas');
+  const closeBtn      = document.getElementById('muscleCanvasClose');
+  const statePills    = document.getElementById('muscleStatePills');
+  const stateDetail   = document.getElementById('muscleStateDetail');
+  const pillsWrap     = document.getElementById('musclePillsWrap');
+  const pillsWrapDet  = document.getElementById('musclePillsWrapDetail');
+  const exercisesPanel = document.getElementById('muscleExercisesPanel');
+  const ctaBtns       = document.querySelectorAll('.muscle-cta');
 
-  if (!overlay || !content || !ctaBtns.length) return;
+  if (!canvas || !ctaBtns.length) return;
 
-  const SAMPLE_IMG = 'https://res.cloudinary.com/dhoymhers/image/upload/f_auto,q_auto,w_400/v1781352454/athletic_photo_yqnusn.png';
-
-  /* ---- MUSCLE DATA ---- */
-  const muscleData = {
+  /* ---- DATA: pills + exercise images per muscle ---- */
+  const canvasData = {
     chest: {
-      title: 'CHEST', icon: '🫁',
       color: 'rgba(255, 100, 60, 0.9)', colorSoft: 'rgba(255, 100, 60, 0.15)',
-      level: 'Beginner – Advanced', duration: '45–60 min', sets: '3–5 sets', reps: '6–15 reps',
       categories: [
-        { name: 'Upper Chest', exercises: ['Incline Bench Press', 'Incline Dumbbell Press', 'Low-to-High Cable Fly'] },
-        { name: 'Middle Chest', exercises: ['Flat Bench Press', 'Dumbbell Press', 'Machine Chest Press'] },
-        { name: 'Lower Chest', exercises: ['Decline Bench Press', 'Dips', 'High-to-Low Cable Fly'] },
+        {
+          name: 'Upper Chest', icon: '🎯',
+          exercises: [
+            { name: 'Incline Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781427991/incline_pushup_n0a7e7.png', howto: 'Place your hands on a raised surface (bench or step), feet on the floor. Lower your chest toward the surface with elbows at 45°, then push back up. Targets the lower portion of the upper chest with reduced strain.' },
+            { name: 'Decline Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781428781/decline_pushup_mqalj7.png', howto: 'Place your feet on a raised surface and hands on the floor, body in a straight line. Lower your chest toward the floor, then push back up. Elevating the feet shifts more load onto the upper chest and shoulders.' },
+            { name: 'Decline Pike Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781428822/decline_pike_pushup_heczbo.png', howto: 'From a pike position with feet elevated and hips raised, bend your elbows to lower your head toward the floor, then press back up. Combines upper chest and shoulder activation with a strong overhead pressing pattern.' },
+          ],
+        },
+        {
+          name: 'Middle Chest', icon: '🎯',
+          exercises: [
+            { name: 'Diamond Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781434512/dimond_pushup_nfq2bl.png', howto: 'Place your hands together under your chest forming a diamond shape with your thumbs and index fingers. Lower your chest toward your hands, keeping elbows close to your body, then push back up. Heavily emphasizes the middle chest and triceps.' },
+            { name: 'Incline Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781427991/incline_pushup_n0a7e7.png', howto: 'Place your hands on a raised surface (bench or step), feet on the floor. Lower your chest toward the surface with elbows at 45°, then push back up. A controlled, joint-friendly variation that still builds chest strength.' },
+            { name: 'Standard Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781427991/incline_pushup_n0a7e7.png', howto: 'Start in a plank position with hands shoulder-width apart. Lower your body until your chest nearly touches the floor, keeping your core tight, then push back up. The fundamental bodyweight chest builder.' },
+          ],
+        },
+        {
+          name: 'Lower Chest', icon: '🎯',
+          exercises: [
+            { name: 'Chest Dips', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781438764/chest_dips_lthlgb.png', howto: 'Support yourself on parallel bars or a dip station, lean your torso forward, and lower your body by bending your elbows until you feel a stretch in your chest. Push back up to the starting position. Leaning forward emphasizes the lower chest.' },
+            { name: 'Standard Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781438809/standard_pushup_vntu8n.png', howto: 'Start in a plank position with hands shoulder-width apart. Lower your body until your chest nearly touches the floor, keeping your core tight, then push back up. A foundational movement that builds overall chest strength.' },
+            { name: 'Diamond Push-Up', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781434512/dimond_pushup_nfq2bl.png', howto: 'Place your hands together under your chest forming a diamond shape with your thumbs and index fingers. Lower your chest toward your hands, keeping elbows close to your body, then push back up. Adds extra triceps and inner chest emphasis.' },
+          ],
+        },
       ],
     },
     back: {
-      title: 'BACK', icon: '🔙',
       color: 'rgba(80, 160, 255, 0.9)', colorSoft: 'rgba(80, 160, 255, 0.15)',
-      level: 'Beginner – Advanced', duration: '50–65 min', sets: '3–5 sets', reps: '6–12 reps',
       categories: [
-        { name: 'Lats', exercises: ['Pull-Ups', 'Lat Pulldown', 'Straight-Arm Pulldown'] },
-        { name: 'Traps', exercises: ['Barbell Shrug', 'Dumbbell Shrug', 'Face Pulls'] },
-        { name: 'Rhomboids', exercises: ['Barbell Row', 'Dumbbell Row', 'Seated Cable Row'] },
-        { name: 'Lower Back', exercises: ['Deadlift', 'Romanian Deadlift', 'Hyperextensions'] },
+        {
+          name: 'Lats', icon: '🎯',
+          exercises: [
+            { name: 'Pulldown', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781441821/pulldown_nhbaww.png', howto: 'Sit at a pulldown machine or use a band anchored overhead. Grip the bar/handles wider than shoulder-width, pull it down toward your chest while squeezing your shoulder blades together, then control it back up. Targets the lats for width and pulling strength.' },
+          ],
+        },
+        {
+          name: 'Traps', icon: '🎯',
+          exercises: [
+            { name: 'Prone T-Raises', img: 'https://res.cloudinary.com/dhoymhers/image/upload/v1781443990/prone_raises_iuaaw7.png', howto: 'Lie face down on a bench or the floor with arms extended out to the sides forming a T shape. Raise your arms upward, squeezing your shoulder blades together, then lower back down with control. Engages the traps and rear delts to build upper back thickness.' },
+          ],
+        },
+        { name: 'Rhomboids', icon: '🎯', exercises: [] },
+        { name: 'Lower Back', icon: '🎯', exercises: [] },
       ],
     },
     shoulder: {
-      title: 'SHOULDER', icon: '🤷',
       color: 'rgba(255, 209, 0, 0.9)', colorSoft: 'rgba(255, 209, 0, 0.15)',
-      level: 'Beginner – Advanced', duration: '40–55 min', sets: '3–4 sets', reps: '8–15 reps',
       categories: [
-        { name: 'Front Delt', exercises: ['Overhead Press', 'Arnold Press', 'Front Raises'] },
-        { name: 'Side Delt', exercises: ['Lateral Raises', 'Cable Lateral Raises', 'Upright Rows'] },
-        { name: 'Rear Delt', exercises: ['Reverse Fly', 'Face Pulls', 'Bent-Over Lateral Raises'] },
+        { name: 'Front Delt', icon: '🎯', exercises: [] },
+        { name: 'Side Delt', icon: '🎯', exercises: [] },
+        { name: 'Rear Delt', icon: '🎯', exercises: [] },
       ],
     },
     arm: {
-      title: 'ARM', icon: '💪',
       color: 'rgba(160, 80, 255, 0.9)', colorSoft: 'rgba(160, 80, 255, 0.15)',
-      level: 'Beginner – Advanced', duration: '40–50 min', sets: '3–4 sets', reps: '8–15 reps',
       categories: [
-        { name: 'Biceps', exercises: ['Barbell Curl', 'Dumbbell Curl', 'Hammer Curl'] },
-        { name: 'Triceps', exercises: ['Skull Crushers', 'Tricep Pushdown', 'Close-Grip Bench Press'] },
-        { name: 'Forearm', exercises: ['Wrist Curls', 'Reverse Curls', 'Farmers Carry'] },
+        { name: 'Biceps', icon: '💪', exercises: [] },
+        { name: 'Triceps', icon: '💪', exercises: [] },
+        { name: 'Forearm', icon: '💪', exercises: [] },
       ],
     },
     abs: {
-      title: 'ABS', icon: '🎯',
       color: 'rgba(60, 200, 140, 0.9)', colorSoft: 'rgba(60, 200, 140, 0.15)',
-      level: 'Beginner – Advanced', duration: '20–35 min', sets: '3–4 sets', reps: '12–20 reps',
       categories: [
-        { name: 'Upper Abs', exercises: ['Crunches', 'Cable Crunches', 'Sit-Ups'] },
-        { name: 'Lower Abs', exercises: ['Leg Raises', 'Reverse Crunches', 'Hanging Knee Raises'] },
+        { name: 'Upper Abs', icon: '🎯', exercises: [] },
+        { name: 'Lower Abs', icon: '🎯', exercises: [] },
       ],
     },
     leg: {
-      title: 'LEG', icon: '🦵',
       color: 'rgba(60, 200, 255, 0.9)', colorSoft: 'rgba(60, 200, 255, 0.15)',
-      level: 'Beginner – Advanced', duration: '55–70 min', sets: '3–5 sets', reps: '6–15 reps',
       categories: [
-        { name: 'Quads', exercises: ['Barbell Squat', 'Leg Press', 'Leg Extension'] },
-        { name: 'Hamstrings', exercises: ['Romanian Deadlift', 'Leg Curl', 'Nordic Curl'] },
-        { name: 'Calves', exercises: ['Standing Calf Raise', 'Seated Calf Raise', 'Donkey Calf Raise'] },
-        { name: 'Glutes', exercises: ['Hip Thrust', 'Glute Bridge', 'Cable Kickback'] },
+        { name: 'Quads', icon: '🦵', exercises: [] },
+        { name: 'Hamstrings', icon: '🦵', exercises: [] },
+        { name: 'Calves', icon: '🦵', exercises: [] },
+        { name: 'Glutes', icon: '🦵', exercises: [] },
       ],
     },
   };
 
-  /* ---- BUILD SUB-MENU (step 1) ---- */
-  const buildSubMenu = (muscle) => {
-    const d = muscleData[muscle];
-    if (!d) return '';
+  let currentMuscle = null;
 
-    const buttons = d.categories.map(cat => `
-      <button class="sub-menu-btn" data-muscle="${muscle}" data-category="${cat.name}"
-        style="--sub-color: ${d.color}; --sub-color-soft: ${d.colorSoft};">
-        <span class="sub-menu-btn-icon">${d.icon}</span>
-        <span class="sub-menu-btn-label">${cat.name}</span>
-        <span class="sub-menu-btn-arrow">→</span>
+  /* ---- BUILD PILLS HTML ---- */
+  const buildPills = (muscle) => {
+    const d = canvasData[muscle];
+    return d.categories.map(cat => `
+      <button class="muscle-pill" data-category="${cat.name}"
+        style="--pill-color: ${d.color}; --pill-color-soft: ${d.colorSoft};">
+        <span class="muscle-pill-icon">${cat.icon}</span>
+        <span class="muscle-pill-label">${cat.name}</span>
+        <span class="muscle-pill-arrow">→</span>
       </button>
     `).join('');
-
-    return `
-      <div class="sub-menu-header">
-        <div class="sub-menu-icon-wrap" style="border-color: ${d.colorSoft}; box-shadow: 0 0 20px ${d.colorSoft};">
-          <span>${d.icon}</span>
-        </div>
-        <div>
-          <p class="modal-eyebrow" style="color: ${d.color};">SELECT FOCUS AREA</p>
-          <h2 class="modal-title">${d.title}</h2>
-        </div>
-      </div>
-      <p class="sub-menu-hint">Choose a muscle group to explore targeted exercises.</p>
-      <div class="sub-menu-buttons">
-        ${buttons}
-      </div>
-    `;
   };
 
-  /* ---- BUILD DETAIL VIEW (step 2) ---- */
-  const buildDetail = (muscle, categoryName) => {
-    const d = muscleData[muscle];
+  /* ---- BUILD EXERCISES PANEL HTML (CAROUSEL) ---- */
+  const buildExercises = (muscle, categoryName) => {
+    const d = canvasData[muscle];
     const cat = d.categories.find(c => c.name === categoryName);
-    if (!d || !cat) return '';
 
-    const exercises = cat.exercises.map(ex => `
-      <div class="muscle-modal-exercise-card">${ex}</div>
+    if (!cat || !cat.exercises.length) {
+      return `<p style="color:#6A6A72; font-family:'Barlow',sans-serif; font-size:0.95rem;">Exercises for ${categoryName} coming soon.</p>`;
+    }
+
+    const cards = cat.exercises.map((ex, i) => `
+      <div class="muscle-exercise-card" data-index="${i}" style="--pill-color: ${d.color}; --pill-color-soft: ${d.colorSoft};">
+        <img class="muscle-exercise-img" src="${ex.img}" alt="${ex.name}" loading="lazy" />
+        <p class="muscle-exercise-name">${ex.name}</p>
+        <p class="muscle-exercise-howto">${ex.howto || ''}</p>
+      </div>
     `).join('');
 
+    const dots = cat.exercises.map((ex, i) => `
+      <span class="muscle-carousel-dot" data-index="${i}" style="--pill-color: ${d.color};"></span>
+    `).join('');
+
+    const navArrows = cat.exercises.length > 1 ? `
+      <button class="muscle-carousel-nav prev" style="--pill-color: ${d.color};">‹</button>
+      <button class="muscle-carousel-nav next" style="--pill-color: ${d.color};">›</button>
+    ` : '';
+
     return `
-      <button class="sub-menu-back-btn" data-back="${muscle}">← BACK</button>
-
-      <div class="muscle-modal-hero">
-        <div class="muscle-modal-icon-wrap" style="border-color:${d.colorSoft}; box-shadow: 0 0 20px ${d.colorSoft};">
-          <span class="muscle-modal-icon">${d.icon}</span>
-        </div>
-        <div class="muscle-modal-hero-text">
-          <p class="modal-eyebrow" style="color:${d.color};">${d.title} TRAINING</p>
-          <h2 class="modal-title">${cat.name.toUpperCase()}</h2>
-          <p class="modal-desc">Targeted exercises to develop and strengthen your ${cat.name.toLowerCase()} for maximum results.</p>
-        </div>
-        <img class="muscle-modal-img" src="${SAMPLE_IMG}" alt="${cat.name}" />
-      </div>
-
-      <div class="modal-badges">
-        <div class="modal-badge">
-          <span class="modal-badge-icon">📊</span>
-          <div>
-            <p class="modal-badge-label">LEVEL</p>
-            <p class="modal-badge-value">${d.level}</p>
-          </div>
-        </div>
-        <div class="modal-badge">
-          <span class="modal-badge-icon">⏱️</span>
-          <div>
-            <p class="modal-badge-label">DURATION</p>
-            <p class="modal-badge-value">${d.duration}</p>
-          </div>
-        </div>
-        <div class="modal-badge">
-          <span class="modal-badge-icon">🔁</span>
-          <div>
-            <p class="modal-badge-label">SETS</p>
-            <p class="modal-badge-value">${d.sets}</p>
-          </div>
-        </div>
-        <div class="modal-badge">
-          <span class="modal-badge-icon">💥</span>
-          <div>
-            <p class="modal-badge-label">REPS</p>
-            <p class="modal-badge-value">${d.reps}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="muscle-modal-category">
-        <h4 class="muscle-modal-cat-name" style="color: ${d.color};">${cat.name} EXERCISES</h4>
-        <div class="muscle-modal-exercises">
-          ${exercises}
-        </div>
-      </div>
-
-      <div class="muscle-modal-actions">
-        <button class="muscle-modal-primary-btn" style="box-shadow: 0 8px 30px ${d.colorSoft}; border-color: ${d.color};">START WORKOUT →</button>
-        <button class="muscle-modal-secondary-btn">SAVE PLAN</button>
-        <button class="muscle-modal-secondary-btn">SHARE</button>
+      <div class="muscle-carousel" data-active="0">
+        ${cards}
+        ${navArrows}
+        <div class="muscle-carousel-dots">${dots}</div>
       </div>
     `;
   };
 
-  /* ---- OPEN / CLOSE ---- */
-  const openSubMenu = (muscle) => {
-    content.innerHTML = buildSubMenu(muscle);
-    overlay.classList.add('open');
+  /* ---- WIRE CAROUSEL NAV / DOTS / CLICK-TO-FRONT ---- */
+  const wireCarousel = (panel) => {
+    const carousel = panel.querySelector('.muscle-carousel');
+    if (!carousel) return;
+
+    const cards = [...carousel.querySelectorAll('.muscle-exercise-card')];
+    const dots  = [...carousel.querySelectorAll('.muscle-carousel-dot')];
+    const prevBtn = carousel.querySelector('.muscle-carousel-nav.prev');
+    const nextBtn = carousel.querySelector('.muscle-carousel-nav.next');
+    const total = cards.length;
+
+    const render = () => {
+      const active = parseInt(carousel.dataset.active, 10);
+      cards.forEach((card, i) => {
+        card.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
+        if (i === active) {
+          card.classList.add('is-active');
+        } else if (i === (active - 1 + total) % total) {
+          card.classList.add('is-prev');
+        } else if (i === (active + 1) % total) {
+          card.classList.add('is-next');
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
+    };
+
+    const goTo = (index) => {
+      carousel.dataset.active = ((index % total) + total) % total;
+      render();
+    };
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        if (!card.classList.contains('is-active')) {
+          goTo(parseInt(card.dataset.index, 10));
+        }
+      });
+    });
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => goTo(parseInt(dot.dataset.index, 10)));
+    });
+
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(parseInt(carousel.dataset.active, 10) - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(parseInt(carousel.dataset.active, 10) + 1));
+
+    render();
+  };
+
+  /* ---- WIRE PILL CLICKS (works for both states) ---- */
+  const wirePills = (container) => {
+    container.querySelectorAll('.muscle-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const category = pill.dataset.category;
+
+        /* mark active */
+        container.querySelectorAll('.muscle-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        /* populate detail state */
+        pillsWrapDet.innerHTML = buildPills(currentMuscle);
+        wirePills(pillsWrapDet);
+        pillsWrapDet.querySelectorAll('.muscle-pill').forEach(p => {
+          if (p.dataset.category === category) p.classList.add('active');
+        });
+
+        exercisesPanel.innerHTML = buildExercises(currentMuscle, category);
+        wireCarousel(exercisesPanel);
+
+        /* switch states */
+        statePills.classList.add('hidden');
+        stateDetail.classList.remove('hidden');
+        stateDetail.classList.add('visible');
+      });
+    });
+  };
+
+  /* ---- OPEN CANVAS ---- */
+  const openCanvas = (muscle) => {
+    currentMuscle = muscle;
+
+    pillsWrap.innerHTML = buildPills(muscle);
+    wirePills(pillsWrap);
+
+    statePills.classList.remove('hidden');
+    stateDetail.classList.remove('visible');
+    stateDetail.classList.add('hidden');
+
+    canvas.classList.add('open');
     document.body.classList.add('modal-open');
-
-    /* wire sub-menu button clicks */
-    content.querySelectorAll('.sub-menu-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const m = btn.dataset.muscle;
-        const cat = btn.dataset.category;
-        content.innerHTML = buildDetail(m, cat);
-
-        /* wire back button */
-        const backBtn = content.querySelector('.sub-menu-back-btn');
-        if (backBtn) {
-          backBtn.addEventListener('click', () => {
-            content.innerHTML = buildSubMenu(backBtn.dataset.back);
-            wireSubMenuBtns();
-          });
-        }
-      });
-    });
   };
 
-  const wireSubMenuBtns = () => {
-    content.querySelectorAll('.sub-menu-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const m = btn.dataset.muscle;
-        const cat = btn.dataset.category;
-        content.innerHTML = buildDetail(m, cat);
-        const backBtn = content.querySelector('.sub-menu-back-btn');
-        if (backBtn) {
-          backBtn.addEventListener('click', () => {
-            content.innerHTML = buildSubMenu(backBtn.dataset.back);
-            wireSubMenuBtns();
-          });
-        }
-      });
-    });
-  };
-
-  const closeModal = () => {
-    overlay.classList.remove('open');
+  /* ---- CLOSE CANVAS ---- */
+  const closeCanvas = () => {
+    canvas.classList.remove('open');
     document.body.classList.remove('modal-open');
   };
 
-  /* ---- WIRE UP CTA BUTTONS ---- */
+  /* ---- WIRE CTA BUTTONS ---- */
   ctaBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      openSubMenu(btn.dataset.muscle);
+      e.preventDefault();
+      openCanvas(btn.dataset.muscle);
     });
   });
 
   /* ---- CLOSE TRIGGERS ---- */
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  if (closeBtn) closeBtn.addEventListener('click', closeCanvas);
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+    if (e.key === 'Escape' && canvas.classList.contains('open')) closeCanvas();
   });
 
 })();
