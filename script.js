@@ -43,6 +43,8 @@
     hamburger.setAttribute('aria-expanded', isOpen);
     // prevent body scroll when menu open
     document.body.style.overflow = isOpen ? 'hidden' : '';
+    // blur page content behind the menu
+    document.body.classList.toggle('menu-open', isOpen);
   });
 
   // Close menu when a link is clicked
@@ -52,6 +54,7 @@
       hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
     });
   });
 
@@ -62,6 +65,7 @@
       hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
+      document.body.classList.remove('menu-open');
     }
   });
 })();
