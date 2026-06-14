@@ -3248,8 +3248,7 @@ body.modal-open {
     flex-direction: column;
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(5,5,5,0.98);
-    backdrop-filter: blur(16px);
+    background: #050505;
     z-index: 1001;
     align-items: center;
     justify-content: center;
@@ -3259,12 +3258,6 @@ body.modal-open {
   .nav-links.open a {
     font-size: 1.5rem;
     color: #F0F0F0;
-  }
-
-  body.menu-open .navbar:not(:has(.nav-links.open)),
-  body.menu-open > *:not(.program-modal-overlay):not(.muscle-canvas-wrap) {
-    filter: blur(6px);
-    transition: filter 0.3s ease;
   }
 
   .hamburger {
