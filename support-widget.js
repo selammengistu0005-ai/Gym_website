@@ -623,7 +623,8 @@
     `;
 
     body.querySelectorAll('.ifg-menu-btn').forEach((b) => {
-      b.addEventListener('click', () => {
+      b.addEventListener('click', (e) => {
+        e.stopPropagation();
         const view = b.dataset.view;
         if (view === 'faq') renderFaq();
         if (view === 'find') renderFind();
@@ -653,7 +654,8 @@
 
     body.querySelectorAll('.ifg-faq-item').forEach((item) => {
       const qBtn = item.querySelector('.ifg-faq-q');
-      qBtn.addEventListener('click', () => {
+      qBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         item.classList.toggle('open');
       });
     });
@@ -679,7 +681,8 @@
     `;
 
     body.querySelectorAll('.ifg-find-item').forEach((item, i) => {
-      item.addEventListener('click', () => {
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
         const target = document.querySelector(FIND_DATA[i].target);
         if (target) {
           closePanel();
@@ -710,7 +713,10 @@
     `;
 
     body.querySelectorAll('.ifg-howto-card').forEach((card, i) => {
-      card.addEventListener('click', () => renderHowtoDetail(i));
+      card.addEventListener('click', (e) => {
+        e.stopPropagation();
+        renderHowtoDetail(i);
+      });
     });
 
     backBtn.onclick = renderMenu;
@@ -755,6 +761,10 @@
     } else {
       openPanel();
     }
+  });
+
+  panel.addEventListener('click', (e) => {
+    e.stopPropagation();
   });
 
   document.addEventListener('keydown', (e) => {
